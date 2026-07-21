@@ -1,0 +1,10 @@
+../Drivers/GPIO/Src/gpio.c:10:13:GPIO_EnableClock	11
+../Drivers/GPIO/Src/gpio.c:36:13:GPIO_SetMode	1
+../Drivers/GPIO/Src/gpio.c:44:13:GPIO_SetPull	1
+../Drivers/GPIO/Src/gpio.c:52:13:GPIO_SetSpeed	1
+../Drivers/GPIO/Src/gpio.c:60:13:GPIO_SetOutputType	1
+../Drivers/GPIO/Src/gpio.c:78:6:GPIO_ConfigPin	1
+../Drivers/GPIO/Src/gpio.c:97:6:GPIO_SetAlternateFunction	2
+../Drivers/GPIO/Src/gpio.c:117:6:GPIO_SetPin	1
+../Drivers/GPIO/Src/gpio.c:122:6:GPIO_ClearPin	1
+../Drivers/GPIO/Src/gpio.c:127:6:GPIO_TogglePin	1
