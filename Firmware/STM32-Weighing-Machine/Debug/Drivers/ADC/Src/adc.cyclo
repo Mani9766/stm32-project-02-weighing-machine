@@ -1,0 +1,16 @@
+../Drivers/ADC/Src/adc.c:10:13:ADC_EnableClock	4
+../Drivers/ADC/Src/adc.c:26:13:ADC_SetPrescaler	1
+../Drivers/ADC/Src/adc.c:32:13:ADC_SetResolution	1
+../Drivers/ADC/Src/adc.c:37:13:ADC_SetAlignment	1
+../Drivers/ADC/Src/adc.c:42:13:ADC_SetScanMode	1
+../Drivers/ADC/Src/adc.c:47:13:ADC_SetContinuousMode	1
+../Drivers/ADC/Src/adc.c:52:13:ADC_SetState	2
+../Drivers/ADC/Src/adc.c:63:6:ADC_Init	3
+../Drivers/ADC/Src/adc.c:89:13:ADC_SetSamplingTime	1
+../Drivers/ADC/Src/adc.c:98:13:ADC_SetConversionSequenceNumber	2
+../Drivers/ADC/Src/adc.c:106:13:ADC_SetSequenceLength	1
+../Drivers/ADC/Src/adc.c:112:6:ADC_ConfigChannel	1
+../Drivers/ADC/Src/adc.c:121:6:ADC_StartConversion	1
+../Drivers/ADC/Src/adc.c:125:10:ADC_ReadData	1
+../Drivers/ADC/Src/adc.c:129:13:ADC_WaitForConversion	2
+../Drivers/ADC/Src/adc.c:134:10:ADC_ReadChannelSingleCoversion	1

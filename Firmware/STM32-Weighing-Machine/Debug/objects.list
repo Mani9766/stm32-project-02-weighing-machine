@@ -1,3 +1,4 @@
+"./Drivers/ADC/Src/adc.o"
 "./Drivers/GPIO/Src/gpio.o"
 "./Src/main.o"
 "./Src/syscalls.o"
