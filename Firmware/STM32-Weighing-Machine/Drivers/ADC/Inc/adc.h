@@ -83,6 +83,8 @@ void ADC_StartConversion(ADC_TypeDef *adc);
 
 uint16_t ADC_ReadData(ADC_TypeDef *adc);
 
-uint16_t ADC_ReadChannel(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time);
+void ADC_WaitForConversion(ADC_TypeDef *adc);
+
+uint16_t ADC_ReadChannelSingleConversion(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time);
 
 #endif /* ADC_INC_ADC_H_ */

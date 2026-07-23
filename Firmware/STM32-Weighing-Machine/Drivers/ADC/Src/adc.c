@@ -88,19 +88,18 @@ void ADC_Init(ADC_TypeDef *adc,
 
 static void ADC_SetSamplingTime(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time){
 
-	adc->SMPR[1U - channel/10U] &= ~(7U << ((channel % 10U) * 3U));
-	adc->SMPR[1U - channel/10U] |= ((uint32_t)sample_time << ((channel % 10U) * 3U));
-
 	assert(channel <= 18U);
 
+	adc->SMPR[1U - channel/10U] &= ~(7U << ((channel % 10U) * 3U));
+	adc->SMPR[1U - channel/10U] |= ((uint32_t)sample_time << ((channel % 10U) * 3U));
 }
 
 static void ADC_SetConversionSequenceNumber(ADC_TypeDef *adc, uint8_t channel, Conv_Seq_No rank){
 
+	assert(rank >= conv_seq_1 && rank <= conv_seq_16);
+
 	adc->SQR[2U - (rank - 1U)/6U] &= ~(0x1FU << (((rank - 1U) % 6U) * 5U));
 	adc->SQR[2U - (rank - 1U)/6U] |= ((uint32_t)channel << (((rank - 1U) % 6U) * 5U));
-
-	assert(rank >= conv_seq_1 && rank <= conv_seq_16);
 }
 
 static void ADC_SetSequenceLength(ADC_TypeDef *adc, uint8_t No_Of_Channels){
@@ -108,8 +107,29 @@ static void ADC_SetSequenceLength(ADC_TypeDef *adc, uint8_t No_Of_Channels){
 	 adc->SQR[0U] |= ((No_Of_Channels - 1U) << 20U);
 }
 
+static void ADC_ConfigInternalChannel(uint8_t channel)
+{
+	switch(channel)
+	{
+	    case 16U:
+	    case 17U:
+	        ADC_COMMON->CCR |= ADC_CCR_TSVREFE;
+	        break;
+
+	    case 18U:
+	        ADC_COMMON->CCR |= ADC_CCR_VBATE;
+	        break;
+
+	    default:
+	        break;
+	}
+}
 
 void ADC_ConfigChannel(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time, Conv_Seq_No rank, uint8_t No_Of_Channels){
+
+	assert(channel <= 18U);
+
+	ADC_ConfigInternalChannel(channel);
 
 	ADC_SetSamplingTime(adc, channel, sample_time);
 
@@ -123,15 +143,16 @@ void ADC_StartConversion(ADC_TypeDef *adc){
 }
 
 uint16_t ADC_ReadData(ADC_TypeDef *adc){
-	return adc->DR;
+	return (uint16_t)adc->DR;
 }
 
-static void ADC_WaitForConversion(ADC_TypeDef *adc)
+void ADC_WaitForConversion(ADC_TypeDef *adc)
 {
     while(!(adc->SR & ADC_SR_EOC));
 }
 
-uint16_t ADC_ReadChannelSingleCoversion(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time){
+uint16_t ADC_ReadChannelSingleConversion(ADC_TypeDef *adc, uint8_t channel, Sampling_Time sample_time){
+
 	ADC_ConfigChannel(adc,
 	                      channel,
 	                      sample_time,

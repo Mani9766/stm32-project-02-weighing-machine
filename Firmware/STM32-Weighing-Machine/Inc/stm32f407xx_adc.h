@@ -50,5 +50,6 @@ typedef struct
 
 #define ADC_SR_EOC             (1U << 1)
 #define ADC_SR_OVR             (1U << 5)
-
+#define ADC_CCR_TSVREFE        (1U << 23)
+#define ADC_CCR_VBATE          (1U << 22)
 #endif /* STM32F407XX_ADC_H_ */

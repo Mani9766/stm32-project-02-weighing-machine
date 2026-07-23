@@ -24,8 +24,46 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+uint16_t adc_output[100];
+
+
 int main(void)
 {
+	GPIO_ConfigPin(GPIOA,
+	                    1,
+						GPIO_ANALOG,
+						GPIO_PUSH_PULL,
+						GPIO_NO_PULL,
+						GPIO_LOW_SPEED);
+
+	ADC_Init(ADC1, ADC_CLOCK_DIV4, Bit_Resolution_6, Right_Alignment,
+			Scan_disable, Cont_Conversion, ADC_En);
+
+	ADC_ConfigChannel(ADC1, 1, Cycles_15, conv_seq_1, 1);
+
+	ADC_StartConversion(ADC1);
+
+	uint16_t i = 0;
+
     /* Loop forever */
-	for(;;);
+	for(;;){
+		ADC_WaitForConversion(ADC1);
+		adc_output[i] = ADC_ReadData(ADC1);
+		i = (i + 1U) % 100U;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
